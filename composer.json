@@ -1,0 +1,27 @@
+{
+    "name": "krak/auto-args",
+    "description": "Auto Argument Resolver",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["auto args", "auto wiring", "argument resolver"],
+    "authors": [
+        {
+            "name": "RJ Garcia",
+            "email": "rj@bighead.net"
+        }
+    ],
+    "require-dev": {
+        "peridot-php/peridot": "^1.18",
+        "pimple/pimple": "^3.0",
+        "symfony/var-dumper": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Krak\\AutoArgs\\": "src"
+        },
+        "files": ["src/resolve-argument.php"]
+    },
+    "require": {
+        "krak/mw": "^0.4.0"
+    }
+}
