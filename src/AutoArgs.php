@@ -20,7 +20,7 @@ class AutoArgs
     }
 
     /** resolves the arguments for the callable and returns the array of args */
-    public function resolveArguments(callable $callable, array $context) {
+    public function resolveArguments($callable, array $context) {
         $resolve_arg = $this->resolve_arg;
 
         $rf = $this->callableToReflectionFunctionAbstract($callable);
@@ -40,7 +40,7 @@ class AutoArgs
         return $args;
     }
 
-    public function callableToReflectionFunctionAbstract(callable $callable) {
+    public function callableToReflectionFunctionAbstract($callable) {
         if (is_array($callable)) {
             return new \ReflectionMethod($callable[0], $callable[1]);
         } else if (is_object($callable) && method_exists($callable, '__invoke')) {
@@ -58,6 +58,6 @@ class AutoArgs
             ->push(defaultValueResolveArgument(), -1, 'defaultValue')
             ->push(varNameResolveArgument(), 0, 'varName')
             ->push(subclassOfResolveArgument(), 0, 'subclassOf')
-            ->push(pimpleContainerResolveArgument(), 0, 'pimpleContainer');
+            ->push(containerResolveArgument(), 0, 'container');
     }
 }
