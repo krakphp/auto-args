@@ -11,8 +11,8 @@
         }
     ],
     "require-dev": {
+        "container-interop/container-interop": "^1.1",
         "peridot-php/peridot": "^1.18",
-        "pimple/pimple": "^3.0",
         "symfony/var-dumper": "^3.2"
     },
     "autoload": {

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+- pimpleContainer to container interop
 - Removed callable typehints to allow for constructor argument resolving
 
 ## [0.1.0] - 2017-01-14

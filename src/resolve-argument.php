@@ -66,7 +66,7 @@ function defaultValueResolveArgument() {
     };
 }
 
-function pimpleContainerResolveArgument($key = 'pimple') {
+function containerResolveArgument($key = 'container') {
     return hasKeyResolveArgument($key, function(ReflectionParameter $arg_meta, array $context, $next) use ($key) {
         if (!$arg_meta->getClass()) {
             return $next($arg_meta, $context);
@@ -75,14 +75,15 @@ function pimpleContainerResolveArgument($key = 'pimple') {
         $class = $arg_meta->getClass();
         $container = $context[$key];
 
-        if (!$container instanceof \Pimple\Container) {
-            throw new \LogicException('Expected Pimple\Container instance');
+        if (!$container instanceof \Interop\Container\ContainerInterface) {
+            throw new \LogicException('Expected Interop\Container\ContainerInterface instance in context');
         }
 
-        if (isset($container[$class->getName()])) {
-            return [$container[$class->getName()]];
+        if ($contianer->has($class->getName())) {
+            return [$container->get($class->getName())];
         }
-        if (_isSubclassOf(\Pimple\Container::class, $class->getName())) {
+
+        if (_isSubclassOf(\Interop\Container\ContainerInterface::class, $class->getName())) {
             return [$container];
         }
 
