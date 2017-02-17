@@ -75,15 +75,15 @@ function containerResolveArgument($key = 'container') {
         $class = $arg_meta->getClass();
         $container = $context[$key];
 
-        if (!$container instanceof \Interop\Container\ContainerInterface) {
+        if (!$container instanceof \Psr\Container\ContainerInterface) {
             throw new \LogicException('Expected Interop\Container\ContainerInterface instance in context');
         }
 
-        if ($contianer->has($class->getName())) {
+        if ($container->has($class->getName())) {
             return [$container->get($class->getName())];
         }
 
-        if (_isSubclassOf(\Interop\Container\ContainerInterface::class, $class->getName())) {
+        if (_isSubclassOf(\Psr\Container\ContainerInterface::class, $class->getName())) {
             return [$container];
         }
 

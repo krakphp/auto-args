@@ -19,6 +19,11 @@ class AutoArgs
         return call_user_func_array($callable, $args);
     }
 
+    public function construct($class, array $context) {
+        $args = $this->resolveArguments($class . '::__construct', $context);
+        return new $class(...$args);
+    }
+
     /** resolves the arguments for the callable and returns the array of args */
     public function resolveArguments($callable, array $context) {
         $resolve_arg = $this->resolve_arg;

@@ -27,24 +27,26 @@ $func = function($a, SplDoublyLinkedList $stack, $b = 1) {
 $args->invoke($func, $context);
 ```
 
-### Pimple Integration
+### Container Integration
 
 ```php
 <?php
 
-use Krak\AutoArgs;
+use Krak\AutoArgs,
+    Krak\Cargo,
+    Interop\Container\ContainerInterface;
 
 $args = new AutoArgs();
+$c = Cargo\container();
+$c[SplStack::class] = function() {
+    return new SplStack();
+};
 
 $context = [
-    'pimple' => new \Pimple\Container([
-        AutoArgs\AutoArgs::class => function() {
-            return $this->aa;
-        }
-    ])
+    'container' => $c->toInterop()
 ];
 
-$func = function(\Pimple\Container $container, AutoArgs\AutoArgs $aa) {
+$func = function(ContainerInterface $container, SplStack $stack) {
 
 };
 
@@ -62,6 +64,10 @@ Accepts an argument resolver which will accept Argument metadata and context and
 #### mixed invoke(callable $callable, array $context)
 
 Invokes a callable and resolves the arguments from the argument resolver and given context.
+
+#### mixed construct($class_name, array $context)
+
+Constructs a an object from the class name and resolves the arguments for the constructor
 
 #### array resolveArguments(callable $callable, array $context)
 

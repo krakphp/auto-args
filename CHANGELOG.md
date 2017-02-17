@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - pimpleContainer to container interop
 - Removed callable typehints to allow for constructor argument resolving
+- Added new `construct` method to allow object construction
 
 ## [0.1.0] - 2017-01-14
 ### Added

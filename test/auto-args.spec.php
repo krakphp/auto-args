@@ -1,6 +1,7 @@
 <?php
 
-use Krak\AutoArgs;
+use Krak\AutoArgs,
+    Krak\Cargo;
 
 class Invokeable {
     public function __invoke() {}
@@ -8,6 +9,15 @@ class Invokeable {
 
 class StaticMethodClass {
     public static function staticMethod() {}
+}
+
+class StaticClass {
+    public $a;
+    public $b;
+    public function __construct($a, $b) {
+        $this->a = $a;
+        $this->b = $b;
+    }
 }
 
 describe('Krak AutoArgs', function() {
@@ -61,18 +71,27 @@ describe('Krak AutoArgs', function() {
                 $context = [
                     'vars' => ['a' => 1, 'stack' => 2],
                     'objects' => [new SplStack()],
-                    'pimple' => new \Pimple\Container([
+                    'container' => Cargo\container([
                         AutoArgs\AutoArgs::class => function() {
                             return $this->aa;
                         }
-                    ])
+                    ])->toInterop(),
                 ];
 
-                $func = function($a, SplDoublyLinkedList $stack, \Pimple\Container $container, AutoArgs\AutoArgs $aa, $b = 1) {
+                $func = function($a, SplDoublyLinkedList $stack, Psr\Container\ContainerInterface $container, AutoArgs\AutoArgs $aa, $b = 1) {
                     assert($a == 1 && $b === 1);
                 };
 
                 $this->aa->invoke($func, $context);
+            });
+        });
+        describe('->construct', function() {
+            it('constructs a class instance', function() {
+                $instance = $this->aa->construct(StaticClass::class, [
+                    'vars' => ['a' => 1, 'b' => 2]
+                ]);
+
+                assert($instance instanceof StaticClass && $instance->b == 2);
             });
         });
     });
