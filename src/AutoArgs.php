@@ -20,8 +20,13 @@ class AutoArgs
     }
 
     public function construct($class, array $context) {
-        $args = $this->resolveArguments($class . '::__construct', $context);
-        return new $class(...$args);
+        $rc = new \ReflectionClass($class);
+        $constructor = $rc->getConstructor();
+        if (!$constructor) {
+            return $rc->newInstance();
+        }
+        $args = $this->resolveArguments($constructor, $context);
+        return $rc->newInstance(...$args);
     }
 
     /** resolves the arguments for the callable and returns the array of args */
@@ -46,7 +51,9 @@ class AutoArgs
     }
 
     public function callableToReflectionFunctionAbstract($callable) {
-        if (is_array($callable)) {
+        if ($callable instanceof \ReflectionFunctionAbstract) {
+            return $callable;
+        } else if (is_array($callable)) {
             return new \ReflectionMethod($callable[0], $callable[1]);
         } else if (is_object($callable) && method_exists($callable, '__invoke')) {
             return new \ReflectionMethod($callable, '__invoke');

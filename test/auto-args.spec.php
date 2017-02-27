@@ -93,6 +93,10 @@ describe('Krak AutoArgs', function() {
 
                 assert($instance instanceof StaticClass && $instance->b == 2);
             });
+            it('constructs a class without constructor', function() {
+                $instance = $this->aa->construct(SplStack::class, []);
+                assert($instance instanceof SplStack);
+            });
         });
     });
 });

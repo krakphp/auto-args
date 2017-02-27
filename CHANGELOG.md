@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+
+- Bug in `AutoArgs::construct` if the object does not have a constructor.
+
 ## [0.2.0] - 2017-02-17
 
 ### Changed
