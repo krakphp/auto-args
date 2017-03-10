@@ -69,7 +69,7 @@ class AutoArgs
         return mw\stack('Resolve Argument')
             ->push(defaultValueResolveArgument(), -1, 'defaultValue')
             ->push(varNameResolveArgument(), 0, 'varName')
-            ->push(subclassOfResolveArgument(), 0, 'subclassOf')
-            ->push(containerResolveArgument(), 0, 'container');
+            ->push(containerResolveArgument(), 0, 'container')
+            ->push(subclassOfResolveArgument(), 0, 'subclassOf');
     }
 }
