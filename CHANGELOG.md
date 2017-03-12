@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.2] - 2017-03-11
+### Fixed
+
+- Bug in auto wiring behavior so that subclassOf middleware runs before the container middleware
+- Updated composer deps to allow 0.4 and 0.5 version of the mw package.
+
 ## [0.2.1] - 2017-02-26
 
 ### Fixed
