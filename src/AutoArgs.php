@@ -9,9 +9,10 @@ class AutoArgs
     private $resolve_arg;
 
     public function __construct(callable $resolve_arg = null) {
-        $this->resolve_arg = $resolve_arg ?: self::createStack()->compose(function() {
-            return [];
-        });
+        $this->resolve_arg = $resolve_arg ?: Mw\compose([
+            function() { return []; },
+            self::createStack()
+        ]);
     }
 
     public function invoke(callable $callable, array $context) {
@@ -66,7 +67,7 @@ class AutoArgs
     }
 
     public static function createStack() {
-        return mw\stack('Resolve Argument')
+        return mw\stack()
             ->push(defaultValueResolveArgument(), -1, 'defaultValue')
             ->push(varNameResolveArgument(), 0, 'varName')
             ->push(containerResolveArgument(), 0, 'container')
