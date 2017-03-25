@@ -42,7 +42,7 @@ class AutoArgs
             if (!count($arg) && $arg_meta->isOptional()) {
                 continue;
             } else if (!count($arg)) {
-                throw new \RuntimeException(sprintf('Action argument %d is unable to be resolved.', $i));
+                throw new Exception\ResolutionException($arg_meta);
             }
 
             $args[] = $arg[0];

@@ -12,7 +12,7 @@
     ],
     "require-dev": {
         "psr/container": "^1.0",
-        "krak/cargo": "^0.1.0",
+        "krak/cargo": "^0.2.0",
         "peridot-php/peridot": "^1.18",
         "symfony/var-dumper": "^3.2"
     },
