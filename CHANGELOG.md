@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Way more verbose exception messages to help the user track down the bug.
+
 ## [0.3.0] - 2017-03-11
 ### Fixed
 
